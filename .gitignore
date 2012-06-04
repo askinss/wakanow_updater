@@ -1,0 +1,12 @@
+config.yml
+# Ignore test
+/test
+
+# Ignore swap files
+*.swp
+
+# Ignore log files
+*.log
+
+# Ignore csv files they are datastore
+*.csv
