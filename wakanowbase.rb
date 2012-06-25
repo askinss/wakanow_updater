@@ -38,14 +38,14 @@ class Wakanowbase
     end
 
     begin
-      @flight.each { |flight| puts @csv_to_arry.reader(flight); @csv_to_arry.reader(flight).each { |flights| puts "This is flight mapping #{flightsmapping(flights)}"; begin; @sugar.set_relationship("wk_flights", @sugar.set_entry("wk_flights", flightsmapping(flights)), "Contacts", @sugar.set_entry("Contacts", @sugar.sugar_object_id("Contacts", flightsmapping(flights).last[:value]))); rescue; logger.info "No record found for customer id #{hotelsmapping(hotels).last[:value]}"; end;  @flightcount += 1 } }
+      @flight.each { |flight| puts @csv_to_arry.reader(flight); @csv_to_arry.reader(flight).each { |flights| puts "This is flight mapping #{flightsmapping(flights)}"; begin; @sugar.set_relationship("wk_flights", @sugar.set_entry("wk_flights", flightsmapping(flights)), "Contacts", @sugar.sugar_object_id("Contacts", flightsmapping(flights).last[:value])); rescue; logger.info "No record found for customer id #{flightsmapping(flights).last[:value]}"; end;  @flightcount += 1 } }
       #@flight.each { |flight| flight.each { |flights| @sugar.set_relationship("wk_flights", @sugar.set_entry("wk_flights", contactmapping(@csv_to_arry.reader(flights))), "Contacts", @sugar.sugar_object_id("Contacts", contactmapping(@csv_to_arry.reader(flights).last[:value]))) } }
     rescue
       logger.info "No flights to process"
     end
 
     begin
-      @hotel.each { |hotel| puts @csv_to_arry.reader(hotel); @csv_to_arry.reader(hotel).each { |hotels| puts "This is hotel mapping #{hotelsmapping(hotels)}"; begin ; @sugar.set_relationship("wk__hotels", @sugar.set_entry("wk__hotels", hotelsmapping(hotels)), "Contacts", @sugar.set_entry("Contacts", @sugar.sugar_object_id("Contacts", hotelsmapping(hotels).last[:value]))); rescue; logger.info "No record found for customer id #{hotelsmapping(hotels).last[:value]}"; end;  @hotelcount += 1 } }
+      @hotel.each { |hotel| puts @csv_to_arry.reader(hotel); @csv_to_arry.reader(hotel).each { |hotels| puts "This is hotel mapping #{hotelsmapping(hotels)}"; begin ; @sugar.set_relationship("wk__hotels", @sugar.set_entry("wk__hotels", hotelsmapping(hotels)), "Contacts", "Contacts", @sugar.sugar_object_id("Contacts", hotelsmapping(hotels).last[:value])); rescue; logger.info "No record found for customer id #{hotelsmapping(hotels).last[:value]}"; end;  @hotelcount += 1 } }
       #@hotel.each { |hotel| hotel.each { |hotels| @sugar.set_relationship("wk__hotels", @sugar.set_entry("wk__hotels", contactmapping(@csv_to_arry.reader(hotels))), "Contacts", @sugar.sugar_object_id("Contacts", contactmapping(@csv_to_arry.reader(hotels).last[:value]))) } }
     rescue
       logger.info "No hotels to process"
